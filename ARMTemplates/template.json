@@ -1,0 +1,39 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "storage_account_name": {
+            "type": "string",
+            "metadata": {
+                "description": "Name of the storage account"
+            }
+        },
+        "location": {
+            "type": "string",
+            "metadata": {
+                "description": "location of the resources"
+            }
+        }
+    },
+    "variables": {
+        "tags": {
+            "Environment": "DEV",
+            "Project": "Learning",
+            "Location": "EastUS"
+        }
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Storage/storageAccounts",
+            "apiVersion": "2025-06-01",
+            "name": "[parameters('storage_account_name')]",
+            "location": "[parameters('location')]",
+            "tags": "[variables('tags')]",
+            "sku": {
+                "name": "Standard_LRS"
+            },
+            "kind": "StorageV2"
+        }
+    ],
+    "outputs": {}
+}

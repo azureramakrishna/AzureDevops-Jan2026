@@ -1,0 +1,41 @@
+{
+    "TutorName": "Ramakrishna",    
+    "TrainingModule": "AzureDevops with AI",
+    "ContactNumber": 9513184144, 
+    "TrainingTopics": ["AzureAdministration", "AzureDevops with AI"],
+    "Landlinenumber": null,
+    "Address": {          
+        "DoorNo": 123,
+        "Location": "Hyderabad",
+        "State": "Telanagana",
+        "Country": "India"
+    },
+    "Participants": [
+        {
+            "Name": "Ashim",
+            "Location": "Banagalore",
+            "IsAzureAdmin": true
+        },
+        {
+            "Name": "Ganesh",
+            "Location": "Poland",
+            "IsAzureAdmin": false
+        },
+        {
+            "Name": "Hem",
+            "Location": "UK",
+            "IsAzureAdmin": true
+        },
+        {
+            "Name": "Vijay",
+            "Location": "Hyderabad",
+            "IsAzureAdmin": true
+        },
+        {
+            "Name": "Gouse",
+            "Location": "Hyderabad",
+            "IsAzureAdmin": true
+        }
+
+    ]
+}

@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery - Azure App Gateway Demo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=Karla:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #ff6b6b;
+            --secondary: #4ecdc4;
+            --accent: #ffe66d;
+            --dark: #2d3436;
+            --light: #dfe6e9;
+        }
+
+        body {
+            font-family: 'Karla', sans-serif;
+            background: linear-gradient(45deg, #ffecd2 0%, #fcb69f 100%);
+            color: var(--dark);
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .blob {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            animation: float 20s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .blob-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--primary);
+            top: -100px;
+            left: -100px;
+            animation-delay: 0s;
+        }
+
+        .blob-2 {
+            width: 350px;
+            height: 350px;
+            background: var(--secondary);
+            bottom: -100px;
+            right: -100px;
+            animation-delay: 5s;
+        }
+
+        .blob-3 {
+            width: 300px;
+            height: 300px;
+            background: var(--accent);
+            top: 50%;
+            right: 10%;
+            animation-delay: 10s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            33% {
+                transform: translate(30px, -30px) scale(1.1);
+            }
+            66% {
+                transform: translate(-20px, 20px) scale(0.9);
+            }
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            padding: 1.5rem 5%;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .nav-home {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .nav-home:hover {
+            color: var(--primary);
+        }
+
+        .route-badge {
+            background: var(--primary);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 5%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+            font-weight: 800;
+            line-height: 1.1;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: rgba(45, 52, 54, 0.7);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .gallery-info {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            border: 2px solid white;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.8s ease-out 0.3s backwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .info-item {
+            text-align: center;
+        }
+
+        .info-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: rgba(45, 52, 54, 0.6);
+            margin-bottom: 0.3rem;
+        }
+
+        .info-value {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            animation: fadeIn 0.8s ease-out 0.5s backwards;
+        }
+
+        .image-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .image-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: 220px;
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .image-placeholder::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(255, 255, 255, 0.1),
+                transparent
+            );
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: translateX(-100%) translateY(-100%) rotate(45deg);
+            }
+            100% {
+                transform: translateX(100%) translateY(100%) rotate(45deg);
+            }
+        }
+
+        .image-info {
+            padding: 1.5rem;
+        }
+
+        .image-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .image-meta {
+            font-size: 0.9rem;
+            color: rgba(45, 52, 54, 0.6);
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.8rem;
+        }
+
+        .image-path {
+            font-family: monospace;
+            font-size: 0.85rem;
+            background: rgba(78, 205, 196, 0.1);
+            color: var(--secondary);
+            padding: 0.3rem 0.6rem;
+            border-radius: 6px;
+            margin-top: 0.5rem;
+        }
+
+        .cdn-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--dark);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <header>
+        <div class="header-content">
+            <a href="/" class="nav-home">← Back to Home</a>
+            <div class="route-badge">Route: /images/*</div>
+        </div>
+    </header>
+
+    <main>
+        <div class="page-header">
+            <h1>Image Gallery Service</h1>
+            <p class="subtitle">
+                Static content delivery with CDN optimization for product media and assets
+            </p>
+        </div>
+
+        <div class="gallery-info">
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-icon">📁</div>
+                    <div class="info-label">Path Pattern</div>
+                    <div class="info-value">/images/*</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">🖥️</div>
+                    <div class="info-label">Backend Pool</div>
+                    <div class="info-value">static-pool</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">🌐</div>
+                    <div class="info-label">Server</div>
+                    <div class="info-value" id="server-name">Loading...</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">📊</div>
+                    <div class="info-label">Total Assets</div>
+                    <div class="info-value">1,247</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="gallery-grid">
+            <div class="image-card">
+                <div class="image-placeholder">🖼️</div>
+                <div class="image-info">
+                    <div class="image-name">Azure VM Banner</div>
+                    <div class="image-meta">
+                        <span>1920x1080</span>
+                        <span>2.4 MB</span>
+                    </div>
+                    <div class="image-path">/images/banners/vm-hero.jpg</div>
+                    <span class="cdn-badge">CDN Cached</span>
+                </div>
+            </div>
+
+            <div class="image-card">
+                <div class="image-placeholder">🎨</div>
+                <div class="image-info">
+                    <div class="image-name">Storage Icon Set</div>
+                    <div class="image-meta">
+                        <span>512x512</span>
+                        <span>156 KB</span>
+                    </div>
+                    <div class="image-path">/images/icons/storage.png</div>
+                    <span class="cdn-badge">CDN Cached</span>
+                </div>
+            </div>
+
+            <div class="image-card">
+                <div class="image-placeholder">📸</div>
+                <div class="image-info">
+                    <div class="image-name">Database Product Shot</div>
+                    <div class="image-meta">
+                        <span>1200x800</span>
+                        <span>890 KB</span>
+                    </div>
+                    <div class="image-path">/images/products/database.jpg</div>
+                    <span class="cdn-badge">CDN Cached</span>
+                </div>
+            </div>
+
+            <div class="image-card">
+                <div class="image-placeholder">🎯</div>
+                <div class="image-info">
+                    <div class="image-name">App Service Logo</div>
+                    <div class="image-meta">
+                        <span>800x800</span>
+                        <span>245 KB</span>
+                    </div>
+                    <div class="image-path">/images/logos/appservice.svg</div>
+                    <span class="cdn-badge">CDN Cached</span>
+                </div>
+            </div>
+
+            <div class="image-card">
+                <div class="image-placeholder">🌟</div>
+                <div class="image-info">
+                    <div class="image-name">Kubernetes Dashboard</div>
+                    <div class="image-meta">
+                        <span>2560x1440</span>
+                        <span>3.1 MB</span>
+                    </div>
+                    <div class="image-path">/images/screenshots/k8s-dash.png</div>
+                    <span class="cdn-badge">CDN Cached</span>
+                </div>
+            </div>
+
+            <div class="image-card">
+                <div class="image-placeholder">💎</div>
+                <div class="image-info">
+                    <div class="image-name">Cosmos DB Thumbnail</div>
+                    <div class="image-meta">
+                        <span>600x400</span>
+                        <span>412 KB</span>
+                    </div>
+                    <div class="image-path">/images/thumbnails/cosmos.jpg</div>
+                    <span class="cdn-badge">CDN Cached</span>
+                </div>
+            </div>
+
+            <div class="image-card">
+                <div class="image-placeholder">🚀</div>
+                <div class="image-info">
+                    <div class="image-name">Performance Chart</div>
+                    <div class="image-meta">
+                        <span>1600x900</span>
+                        <span>678 KB</span>
+                    </div>
+                    <div class="image-path">/images/charts/performance.svg</div>
+                    <span class="cdn-badge">CDN Cached</span>
+                </div>
+            </div>
+
+            <div class="image-card">
+                <div class="image-placeholder">✨</div>
+                <div class="image-info">
+                    <div class="image-name">Architecture Diagram</div>
+                    <div class="image-meta">
+                        <span>2000x1200</span>
+                        <span>1.8 MB</span>
+                    </div>
+                    <div class="image-path">/images/diagrams/architecture.png</div>
+                    <span class="cdn-badge">CDN Cached</span>
+                </div>
+            </div>
+
+            <div class="image-card">
+                <div class="image-placeholder">🎪</div>
+                <div class="image-info">
+                    <div class="image-name">Marketing Banner</div>
+                    <div class="image-meta">
+                        <span>1920x600</span>
+                        <span>1.2 MB</span>
+                    </div>
+                    <div class="image-path">/images/marketing/banner-promo.jpg</div>
+                    <span class="cdn-badge">CDN Cached</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('server-name').textContent = window.location.hostname || 'localhost';
+    </script>
+</body>
+</html>
