@@ -12,7 +12,7 @@ variable "ressource_group_name_02" {
 
 variable "location" {
   type    = string
-  default = "eastus"
+  default = "Canada Central"
 }
 
 variable "storage_account_name" {
@@ -31,4 +31,14 @@ variable "tags" {
 variable "pip_name" {
   type    = string
   default = "saanvikit-pip"
+}
+
+variable "app_service_plan_name" {
+  type    = string
+  default = "saanvikit-app-serviceplan"
+}
+
+variable "app_service_name" {
+  type    = string
+  default = "saanvikit21012026"
 }
