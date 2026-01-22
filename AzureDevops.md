@@ -543,3 +543,30 @@ AzureDevops :
 IAC - Infrastrcutre as a code
 
 ARMTemplates (Azure Resource Manager templates) - JSON
+
+
+Terraform:
+=========
+
+ARMTemplates                            Bicep                               Terraform
+============                            =====                               ==========
+1. IAC                                  1. IAC                              1. IAC
+2. Specific to Azure                    2. Specific to Azure                2. Open source (Azure, AWS, GCP, onprem, etc)
+3. JSON format                          3. Diclarative language             3. HCL format (Hashicorp configuration language)
+4. template.json                        4. main.bicep                       4. main.tf
+    parameters.json                         main.bicepparam                     variables.tf
+5. Schema                               5. param                            5. building block
+    contentversion                          var                                 provider
+    parameters                              resources                           resources
+    variables                               outputs                             outputs
+    resources
+    outputs
+6. New-AzResourceGroupDeployment `                                          6. Lifecycle
+    -ResourceGroupName arm                                                      terraform init
+    -TemplateFile ./template.json                                               terraform fmt
+    -TemplateParametersFile ./paramertes.json                                   terraform validate
+    -Verbose                                                                    terraform plan
+                                                                                terraform apply 
+                                                                                terraform destroy
+
+

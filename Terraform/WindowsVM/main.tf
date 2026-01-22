@@ -54,6 +54,7 @@ resource "azurerm_windows_virtual_machine" "example" {
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
   size                = "Standard_B2s"
+  tags                = var.tags
   admin_username      = var.admin_username
   admin_password      = data.azurerm_key_vault_secret.example.value
   network_interface_ids = [
@@ -71,4 +72,22 @@ resource "azurerm_windows_virtual_machine" "example" {
     sku       = "2025-Datacenter"
     version   = "latest"
   }
+}
+
+# Create a data disk
+resource "azurerm_managed_disk" "example" {
+  name                 = "${var.virtual_machine_name}-data-disk-01" // saanvikit-vm-data-disk-01
+  location             = azurerm_resource_group.rg.location
+  resource_group_name  = azurerm_resource_group.rg.name
+  storage_account_type = "Standard_LRS"
+  create_option        = "Empty"
+  disk_size_gb         = 10
+}
+
+# Attach the data disk to the VM
+resource "azurerm_virtual_machine_data_disk_attachment" "example" {
+  managed_disk_id    = azurerm_managed_disk.example.id
+  virtual_machine_id = azurerm_windows_virtual_machine.example.id
+  lun                = "1"
+  caching            = "ReadWrite"
 }
