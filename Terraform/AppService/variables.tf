@@ -17,11 +17,6 @@ variable "tags" {
   }
 }
 
-variable "pip_name" {
-  type    = string
-  default = "saanvikit-pip"
-}
-
 variable "app_service_plan_name" {
   type    = string
   default = "saanvikit-app-serviceplan"
@@ -32,3 +27,4 @@ variable "app_service_name" {
   default = "saanvikit21012026"
 
 }
+
