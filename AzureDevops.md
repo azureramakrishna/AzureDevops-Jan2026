@@ -570,3 +570,138 @@ ARMTemplates                            Bicep                               Terr
                                                                                 terraform destroy
 
 
+
+AzureDevops:
+===========
+
+portal: portal.azure.com
+devops: dev.azure.com
+
+AzureBoards:
+===========
+
+1. Agile
+2. Scrum
+3. Basic
+4. CMMI
+
+Backlogs - Scrum master (PMO)
+
+Iterations/Sprints. - 2 weeks 
+
+- Sprint planning 
+    userstories from backlogs 
+    capacity planing
+
+- Daily standup calls (15 to 30min)
+    Tasks 
+    Blockers
+
+- Retrospective 
+    What went well 
+    What didn't went well
+    What can be improved
+
+
+Epic
+    \_
+        Features
+            \_
+                Userstory
+                    \_
+                        Task
+                            \_
+                                Issues
+
+
+
+Epic                        Amazon.in
+
+Features                    Singup page 
+                            Login Page
+                            Home page 
+                            Product catelog 
+                            Cart page 
+                            Payment gateway
+                            Tracking page
+                            Support page  
+
+User story                  Singup with different accounts
+                            Login  with different accounts
+                            Home page 
+
+
+Tasks                       Singup with google account. (16hr)
+                            Signup with apple account 
+                            Signup with Email and password     
+
+Issues              
+
+
+Git:
+===
+
+git
+git config -l
+git clone https://saanvikit9@dev.azure.com/saanvikit9/SAANVIK-IT/_git/SAANVIK-IT
+cd SAANVIK-IT/
+git branch
+git status
+git add .
+git status
+git commit -m "ARMTemplates"
+git push origin main
+git branch
+git branch --all
+git fetch --all
+git branch --all
+git checkout develop
+git branch
+git checkout -b feature/terraform
+git branch
+git status
+clear
+git status
+git add .
+git status
+git commit -m "Terraform"
+git push origin feature/terraform
+clear
+git branch
+git checkout develop
+git checkout main
+git branch
+git checkout develop
+clear
+git branch
+git fetch origin develop
+git pull origin develop
+git checkout main
+clear
+git status
+git fetch origin main
+git pull origin main
+git branch
+git status
+git checkout develop
+git checkout main
+clear
+git status
+git stash
+git status
+git stash apply
+
+
+Git branching policies:
+======================
+
+
+Pipelines: CI CD. (YAML)
+========
+
+Pre-requisites:
+==============
+- Self-Hosted agent pool
+- Service connection
+
+- Azure pipeline (YAML)  Terraform

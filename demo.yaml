@@ -1,0 +1,20 @@
+---
+TutorName: Ramakrishna
+TrainingModule: 'AzureDevops with AI'
+Duration: '3 Months'
+ContactNumber: 9513184144
+TrainingTopics: 
+  - 'Introduction to Azure DevOps'
+  - 'Setting up CI/CD Pipelines'
+  - 'Integrating AI in DevOps'
+  - 'Monitoring and Analytics with AI'
+  - 'Best Practices and Case Studies'
+
+Participants:
+  - Name: "Ashim"
+    Location: "Bangalore"
+    IsAzureAdmin: true
+  
+  - Name: "Ganesh"
+    Location: "Poland"
+    IsAzureAdmin: false
