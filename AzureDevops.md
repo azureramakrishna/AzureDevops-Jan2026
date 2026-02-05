@@ -701,7 +701,57 @@ Pipelines: CI CD. (YAML)
 
 Pre-requisites:
 ==============
-- Self-Hosted agent pool
+- Agent pool
+    - Microsofoft Hosted Agent
+
+    - Self Hosted agent pool 
+            Download the Agent
+            Extract it
+            Run the .confish file
+
+            server URL
+            PAT 
+            Agent pool name
+            VM name
+            working directory
+
+            sudo ./svc.sh install
+            sudo ./svc/sh start
+
+
 - Service connection
 
+
 - Azure pipeline (YAML)  Terraform
+
+2vcpu 8gb ram
+
+1vcpu 3.5gb ram
+
+terraform drift
+
+terraform plan
+terraform apply
+
+
+Build and deploy to a Java web app
+==================================
+
+# Create a resource group to organize and manage related Azure resources
+az group create --location Canadacentral --name springboot-app-rg
+
+# Create an App Service plan with Linux as the operating system
+# The plan defines the compute resources for your web app
+az appservice plan create -g springboot-app-rg -n springboot-service-plan --is-linux
+
+# Create a web app using the App Service plan
+# Configure Tomcat 10.1 with Java 17 as the runtime environment
+az webapp create -g springboot-app-rg -p springboot-service-plan -n springboot-app --runtime "TOMCAT|10.1-java17"
+
+
+GitHub Actions:
+==============
+
+GitHub Runner
+    - Self-Hosted GitHub runners
+    - GitHub hosted runner

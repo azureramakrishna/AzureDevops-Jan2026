@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36" version="29.3.4">
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36" version="29.3.6">
   <diagram name="Page-1" id="zpzUyn7wd8f6N-UFBxH-">
     <mxGraphModel dx="1184" dy="665" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -1065,6 +1065,35 @@
         </mxCell>
         <mxCell id="qtmJBonvrmCubA7jYdkJ-17" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="Pull request:&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;feature/terraform --&amp;gt; develop&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Review --&amp;gt; Approve&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Merge:&lt;/div&gt;&lt;div&gt;- Merge&lt;/div&gt;&lt;div&gt;- Squash merge&lt;/div&gt;&lt;div&gt;- Rebase fast forward&lt;/div&gt;&lt;div&gt;- Rebase with semiliniar&lt;/div&gt;" vertex="1">
           <mxGeometry height="30" width="200" x="902.55" y="13420" as="geometry" />
+        </mxCell>
+        <mxCell id="kopLmNtNFaZJeK5V05yi-6" edge="1" parent="1" source="kopLmNtNFaZJeK5V05yi-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="670" y="13870" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="kopLmNtNFaZJeK5V05yi-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="100" width="162.5" x="676.75" y="13820" as="geometry" />
+        </mxCell>
+        <mxCell id="kopLmNtNFaZJeK5V05yi-2" parent="1" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="130" width="165.5" x="254.5" y="13805" as="geometry" />
+        </mxCell>
+        <mxCell id="kopLmNtNFaZJeK5V05yi-3" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Azure Subscription" vertex="1">
+          <mxGeometry height="30" width="60" x="270" y="13780" as="geometry" />
+        </mxCell>
+        <mxCell id="kopLmNtNFaZJeK5V05yi-4" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="AzureDevops&lt;div&gt;dev.azure.com/saanvikit9/saanvik-it&lt;/div&gt;" vertex="1">
+          <mxGeometry height="30" width="200" x="660" y="13780" as="geometry" />
+        </mxCell>
+        <mxCell id="kopLmNtNFaZJeK5V05yi-5" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;entryX=0.875;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" target="kopLmNtNFaZJeK5V05yi-2" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="670" y="13870" as="sourcePoint" />
+            <mxPoint x="630" y="13950" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="kopLmNtNFaZJeK5V05yi-7" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Service Connection" vertex="1">
+          <mxGeometry height="30" width="60" x="497.5" y="13830" as="geometry" />
+        </mxCell>
+        <mxCell id="kopLmNtNFaZJeK5V05yi-8" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="App Registration" vertex="1">
+          <mxGeometry height="30" width="60" x="492" y="13880" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

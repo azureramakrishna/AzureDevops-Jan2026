@@ -1,0 +1,52 @@
+name: 'Terraform'
+
+on:
+  push:
+    branches: ["main", "develop"]
+  pull_request:
+    branches: ["main", "develop"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  terraform:
+    name: 'Terraform'
+    runs-on: saanvikit-runner
+    environment: production
+    
+    env:
+      ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}         
+      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }} 
+      ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }} 
+      ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+      TF_WORKING_DIR: terraform/for_each
+    
+    defaults:
+      run:
+        shell: bash
+        working-directory: ${{ env.TF_WORKING_DIR }}
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+
+    - name: Terraform Init
+      run: terraform init
+
+    - name: Terraform Format
+      run: terraform fmt -check
+
+    - name: Terraform Validate
+      run: terraform validate
+
+    - name: Terraform Plan
+      run: terraform plan -input=false
+
+    - name: Terraform Apply
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      run: terraform apply -auto-approve -input=false
